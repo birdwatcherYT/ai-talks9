@@ -316,3 +316,23 @@ section::after {
 .stream-table table td:first-child {
     text-align: left;
 }
+
+/* 推論エンジン比較表: 列が 10 あるので、セルが折れて縦に伸びないよう nowrap にする。
+   ヘッダの「TTFT 1並列」などは <br> で 2 行に分けている。数値は桁を揃えて読めるよう右寄せにし、
+   先頭 4 列 (モデル / 量子化 / GPU / エンジン) だけ左寄せにする。 */
+.engine-table table {
+    table-layout: auto;
+    margin-inline: auto;
+}
+
+.engine-table table th,
+.engine-table table td {
+    white-space: nowrap;
+    padding: 0.15em 0.45em;
+    text-align: right;
+}
+
+.engine-table table th:nth-child(-n+4),
+.engine-table table td:nth-child(-n+4) {
+    text-align: left;
+}
