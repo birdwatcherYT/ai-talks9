@@ -146,6 +146,28 @@ section::after {
     line-height: 1.2;
 }
 
+/* タスク遂行結果の表と右側の凡例 */
+.bench-results {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+}
+
+.bench-results > .bench-table {
+    flex: 1;
+    min-width: 0;
+}
+
+.bench-legend {
+    flex: 0 0 180px;
+    padding-top: 4px;
+    line-height: 1.5;
+}
+
+.bench-legend p {
+    margin: 0 0 0.8em;
+}
+
 /* ベンチ結果表: ○○○ / 47s / 41回 が途中で折れないように */
 .bench-table table {
     table-layout: auto;
