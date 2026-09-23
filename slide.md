@@ -3,7 +3,7 @@ marp: true
 theme: default
 paginate: true
 header: 'そのライブラリ、モデルと相性いいですか？'
-footer: 'DeNA'
+footer: 'DeNA - Tomoki Yoshida'
 style: @import "style.css"
 ---
 
