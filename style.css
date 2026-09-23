@@ -1,0 +1,318 @@
+/* ベースを上寄せに */
+section {
+    align-content: start !important;
+}
+
+/* 中央寄せ */
+section.vertical-center {
+    align-content: center !important;
+    padding-top: 0;
+}
+
+/* ページ番号の左にロゴ画像を表示（ページ番号が出るスライドのみ） */
+section[data-marpit-pagination]::before {
+    content: '';
+    position: absolute;
+    bottom: 15px;
+    right: 110px;
+    width: 128px;
+    height: 26px;
+    background-image: url('fig/js0.svg'), url('fig/js1.svg'), url('fig/js2.svg'), url('fig/js3.svg');
+    background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+    background-position: 0 center, 32px center, 64px center, 96px center;
+    background-size: auto 26px, auto 26px, auto 26px, auto 26px;
+}
+
+/* ページの分数表示 */
+section::after {
+    content: attr(data-marpit-pagination) ' / ' attr(data-marpit-pagination-total) !important;
+}
+
+/* グリッドレイアウト */
+.grid {
+    display: grid;
+    gap: 1rem;
+}
+
+/* カラム数 */
+.cols2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.cols3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.cols4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+/* フレックスコンテナと均等配置クラス */
+.flex {
+    display: flex;
+    gap: 1rem;
+}
+
+/* 水平方向の配置 */
+.horizontal-center {
+    /* 中央揃え */
+    justify-content: center;
+}
+
+.horizontal-between {
+    /* 両端揃え */
+    justify-content: space-between;
+}
+
+.horizontal-around {
+    /* 左右に均等スペース */
+    justify-content: space-around;
+}
+
+.horizontal-evenly {
+    /* 全て均等スペース */
+    justify-content: space-evenly;
+}
+
+/* 垂直方向の配置 */
+.vertical-center {
+    align-items: center;
+}
+
+/* テキスト折り返し */
+.wrap {
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+}
+
+/* テキスト配置クラス */
+.text-left {
+    text-align: left;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+/* テキストカラーのクラス */
+.red {
+    color: #c0392b;
+    /* 落ち着いた赤 */
+}
+
+.blue {
+    color: #2980b9;
+    /* 落ち着いた青 */
+}
+
+.green {
+    color: #27ae60;
+    /* 落ち着いた緑 */
+}
+
+.yellow {
+    color: #f1c40f;
+    /* 落ち着いた黄色 */
+}
+
+.purple {
+    color: #8e44ad;
+    /* 落ち着いた紫 */
+}
+
+.orange {
+    color: #e67e22;
+    /* 落ち着いたオレンジ */
+}
+
+.gray {
+    color: #7f8c8d;
+    /* 落ち着いた灰色 */
+}
+
+/* フォントサイズ調整クラス */
+
+.tiny {
+    font-size: 0.6em;
+}
+
+.tiny table td,
+.tiny table th {
+    padding: 0.1em 0.3em;
+    line-height: 1.2;
+}
+
+/* ベンチ結果表: ○○○ / 47s / 41回 が途中で折れないように */
+.bench-table table {
+    table-layout: auto;
+    width: max-content;
+    max-width: 100%;
+    margin-inline: auto;
+}
+
+.bench-table table th,
+.bench-table table td {
+    white-space: nowrap;
+    vertical-align: top;
+    /* 注記付きセルが増えて縦がはみ出すので、行の余白は最小にする */
+    padding: 0.08em 0.3em;
+    line-height: 1.18;
+}
+
+.bench-table .metric {
+    white-space: nowrap;
+}
+
+/* 注記は 2 行に折れると行高が跳ねるので、折らずに小さくして 1 行に収める */
+.bench-table .note {
+    white-space: nowrap;
+    display: block;
+    font-size: 0.76em;
+    line-height: 1.05;
+    margin-top: 0;
+}
+
+.grid.cols2.bench-table > div {
+    min-width: 0;
+    overflow-x: auto;
+}
+
+.grid.cols2.bench-table table {
+    width: 100%;
+    max-width: 100%;
+}
+
+.small {
+    font-size: 0.8em;
+}
+
+.large {
+    font-size: 1.2em;
+}
+
+.huge {
+    font-size: 1.5em;
+}
+
+
+/* 開発スケジュール（ガントチャート） */
+.gantt {
+    display: grid;
+    grid-template-columns: 0.85fr 1.1fr 1.1fr 0.95fr;
+    grid-auto-rows: minmax(36px, auto);
+    gap: 6px 10px;
+    margin-top: 0.6em;
+    font-size: 0.78em;
+}
+
+.gantt .phase {
+    background: #e5e7eb;
+    color: #4b5563;
+    padding: 0 24px 0 12px;
+    line-height: 30px;
+    height: 30px;
+    font-weight: 600;
+    text-align: right;
+    clip-path: polygon(0 10%, calc(100% - 14px) 10%, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, calc(100% - 14px) 90%, 0 90%);
+    align-self: center;
+}
+
+.gantt .bar {
+    border-radius: 5px;
+    padding: 2px 10px;
+    line-height: 1.2;
+    color: #1f2937;
+    display: flex;
+    align-items: center;
+    white-space: normal;
+    overflow: hidden;
+    font-size: 0.95em;
+}
+
+.gantt .spec { background: #fef3c7; }
+.gantt .dev  { background: #dbeafe; }
+.gantt .qa   { background: #e5e7eb; }
+
+.gantt .summary {
+    background: #fef3c7;
+    font-size: 0.78em;
+    line-height: 1.25;
+    padding: 6px 10px;
+    display: flex;
+    align-items: center;
+    white-space: normal;
+    border-radius: 5px;
+    color: #1f2937;
+}
+
+.gantt .buffer {
+    background: #e5e7eb;
+    color: #6b7280;
+    font-weight: 600;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+}
+
+.gantt .milestone {
+    background: #f43f5e;
+    color: #fff;
+    font-weight: 700;
+    line-height: 36px;
+    padding: 0 22px 0 14px;
+    clip-path: polygon(0 20%, calc(100% - 14px) 20%, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, calc(100% - 14px) 80%, 0 80%);
+}
+
+.gantt .c1  { grid-column: 1; }
+.gantt .c2  { grid-column: 2; }
+.gantt .c3  { grid-column: 3; }
+.gantt .c4  { grid-column: 4; }
+.gantt .c12 { grid-column: 1 / span 2; }
+.gantt .c23 { grid-column: 2 / span 2; }
+.gantt .r1 { grid-row: 1; }
+.gantt .r2 { grid-row: 2; }
+.gantt .r3 { grid-row: 3; }
+.gantt .r4 { grid-row: 4; }
+.gantt .r5 { grid-row: 5; }
+.gantt .r6 { grid-row: 6; }
+.gantt .r7 { grid-row: 7; }
+.gantt .r8 { grid-row: 8; }
+.gantt .r3-4 { grid-row: 3 / span 2; }
+
+
+/* スライド内時計/タイマーのスタイル */
+.slide-clock {
+    position: absolute;     /* スライド(section)を基準に配置 */
+    top: 21px;              /* ヘッダーと同じくらいの高さ */
+    right: 30px;            /* 右端からの距離 */
+    font-size: 18px;        /* ヘッダーの文字サイズに合わせる */
+    color: gray;          /* 目立ちすぎない色 */
+    font-family: monospace; /* 数字の幅を揃える（お好みで） */
+    z-index: 10;            /* コンテンツより手前に */
+}
+
+/* 構造化ストリーミング比較表: 列が 8 つあるので折り返さず詰める。
+   モデル名や header が 3 行に折れると縦もはみ出すため nowrap が要る。 */
+.stream-table table {
+    table-layout: auto;
+    width: 100%;
+    font-size: 0.92em;
+}
+
+.stream-table table th,
+.stream-table table td {
+    white-space: nowrap;
+    padding: 0.15em 0.35em;
+    text-align: center;
+}
+
+.stream-table table th:first-child,
+.stream-table table td:first-child {
+    text-align: left;
+}
