@@ -47,7 +47,7 @@ AI技術開発部AIイノベーショングループ
 
 </div>
 
-<div>
+<div class="small">
 
 - 学生時代
     - 機械学習凸最適化の高速化 ([KDD2018](https://www.kdd.org/kdd2018/accepted-papers/view/safe-triplet-screening-for-distance-metric-learning), [KDD2019](https://www.kdd.org/kdd2019/accepted-papers/view/learning-interpretable-metric-between-graphs-convex-formulation-and-computa))
@@ -56,7 +56,7 @@ AI技術開発部AIイノベーショングループ
     - 2020年 DeNA新卒入社
     - エネルギー事業（組み合わせ最適化）
     - ライブ配信Pococha（[CS審査効率化、レコメンド](https://www.docswell.com/s/DeNA_Tech/K4V978-aiday-specific-1500)）
-    - **新規AIプロダクト開発**（英語、マチアプ、受験など）
+    - **新規AIプロダクト開発**（英語、マチアプ、受験、音声対話など）
 
 <span class="text-right">
 
