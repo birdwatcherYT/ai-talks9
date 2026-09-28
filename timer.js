@@ -95,7 +95,76 @@ function updateTime() {
     });
 }
 
-// --- 4. 初期化とDOM要素の注入 ---
+// --- 4. リセット (表紙でのみ) ---
+
+// プレゼンター表示など別ウィンドウとリセットを同期するためのキー (Marp の同期と同じく localStorage を使う)
+const RESET_SYNC_KEY = `slide-timer-reset:${location.pathname}`;
+
+/**
+ * タイマーを start から開始し直す (カウントダウン/カウントアップのみ)
+ */
+function applyReset(start) {
+    startTime = start;
+    if (IS_COUNTDOWN_MODE) {
+        const initialSeconds = Math.ceil(initialMinutes * 60);
+        endTime = new Date(startTime.getTime() + initialSeconds * 1000);
+    }
+    // タイムアップで止まっている場合もあるので張り直す
+    clearInterval(timerInterval);
+    updateTime();
+    timerInterval = setInterval(updateTime, 1000);
+}
+
+/**
+ * このウィンドウでリセットし、他のウィンドウにも開始時刻を伝える
+ */
+function resetTimer() {
+    const start = new Date();
+    applyReset(start);
+    try {
+        localStorage.setItem(RESET_SYNC_KEY, String(start.getTime()));
+    } catch (e) {
+        // localStorage が使えない環境では同期しない
+    }
+}
+
+/**
+ * 表紙 (1枚目) を表示中かどうか。bespoke は #1 のようにページ番号をハッシュに持つ
+ */
+function isOnCover() {
+    return location.hash === '' || location.hash === '#1';
+}
+
+function setupReset() {
+    if (!IS_COUNTDOWN_MODE && !IS_COUNTUP_MODE) return;
+
+    // 表紙のタイマーをクリックでリセット
+    const coverClock = document.querySelector('section[id="1"] .slide-clock');
+    if (coverClock) {
+        coverClock.style.cursor = 'pointer';
+        coverClock.title = 'クリックでリセット';
+        coverClock.addEventListener('click', (e) => {
+            e.stopPropagation();
+            resetTimer();
+        });
+    }
+
+    // 表紙で R キーでもリセット
+    document.addEventListener('keydown', (e) => {
+        if (e.key !== 'r' && e.key !== 'R') return;
+        if (e.metaKey || e.ctrlKey || e.altKey) return; // Cmd+R 等のリロードは邪魔しない
+        if (isOnCover()) resetTimer();
+    });
+
+    // 他のウィンドウでのリセットを受け取る (storage イベントは書き込んだ側以外で発火する)
+    window.addEventListener('storage', (e) => {
+        if (e.key !== RESET_SYNC_KEY || !e.newValue) return;
+        const start = Number(e.newValue);
+        if (!isNaN(start)) applyReset(new Date(start));
+    });
+}
+
+// --- 5. 初期化とDOM要素の注入 ---
 
 function initTime() {
     // 全スライドに時計/タイマー要素を注入
@@ -110,9 +179,10 @@ function initTime() {
 
     updateTime();
     timerInterval = setInterval(updateTime, 1000);
+    setupReset();
 }
 
-// --- 5. 実行 ---
+// --- 6. 実行 ---
 
 // アクティブなモードが指定されている場合のみ実行
 if (IS_ACTIVE_MODE) {
