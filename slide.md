@@ -330,7 +330,7 @@ agent = create_agent(model=llm, tools=tools, response_format=AgentOutput)
 - Mastra（ライブラリ側）
     - temperature: ライブラリ既定値=0 → プロバイダ既定値へ変更された
 
-考えずにアップデートすると、デフォルト値が変わったり、効かなくなったりする。
+**考えずにアップデートすると、デフォルト値が変わったり、効かなくなったり**する。
 
 ---
 
