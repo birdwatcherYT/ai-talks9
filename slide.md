@@ -484,6 +484,8 @@ Agent as Tool 3FW ＋ Subagent 2FW × 12モデル × 3回 ＝ **180 実行**
 # Appendix: Skillsをセルフ実装する
 
 ---
+<!-- _paginate: skip -->
+
 # ToolとSkillsやMCPとの違い
 - **Tool**: **定義と引数スキーマが常にシステムプロンプトに積まれる**
 - **MCP**: サーバーに登録された**全ツールの定義・引数スキーマが常にシステムプロンプトに積まれる**。ツールが増えるほどコンテキストウィンドウを圧迫する
@@ -492,6 +494,8 @@ Agent as Tool 3FW ＋ Subagent 2FW × 12モデル × 3回 ＝ **180 実行**
 **MCP/Tool を Skill で括ると圧迫を防げる**: 初期プロンプトには Skill の概要だけが載り、必要になった時点で Skill 内の MCP/Tool 群がロードされる
 
 ---
+<!-- _paginate: skip -->
+
 # Skills（オンデマンドプロンプト）を実装するには
 
 **方針**
